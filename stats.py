@@ -1,3 +1,5 @@
+import math
+
 class Statistics:
     def mean(list):
         return sum(list) / len(list)
@@ -86,6 +88,9 @@ class Statistics:
         }
 
 class BinomialDistribution:
+    """
+    Used with discrete binomial data
+    """
     def mean(n, p):
         return n * p
     def std(n, p):
@@ -93,9 +98,22 @@ class BinomialDistribution:
     def variance(n, p):
         return n * p * (1 - p)
     def prob(min, max, n, p_succ):
-        import math
         p_fail = 1 - p_succ
         sum = 0
         for x in range(min, max + 1):
             sum += math.comb(n, x) * p_succ ** x * p_fail ** (n - x)
         return sum
+
+class NormalDistribution:
+    """
+    Used with continuous binomial data
+    Easier to approximate
+    """
+    def z(x, mean, std):
+        return (x - mean) / std
+    def ztab():
+        # prints out a z-score probability table
+        print("")
+    def pdf(x, mean, std): # probability density funciton
+        return ((1/(2*math.pi*std)**0.5)*math.e)**((-(x-mean)**2)/2*std**2)
+    
