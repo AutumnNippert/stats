@@ -103,17 +103,27 @@ class BinomialDistribution:
         for x in range(min, max + 1):
             sum += math.comb(n, x) * p_succ ** x * p_fail ** (n - x)
         return sum
+    def comb(n,x):
+        print("Fun factorial stuff")
+        math.factorial(n)/(math.factorial(n-x) * math.factorial(x))
 
 class NormalDistribution:
     """
     Used with continuous binomial data
     Easier to approximate
     """
-    def z(x, mean, std):
+    def z(x, n, p):
+        mean = BinomialDistribution.mean(n,p)
+        std = BinomialDistribution.std(n,p)
         return (x - mean) / std
     def ztab():
         # prints out a z-score probability table
         print("")
-    def pdf(x, mean, std): # probability density funciton
+    def pdf(x, n, p): # probability density funciton
+        mean = BinomialDistribution.mean(n,p)
+        std = BinomialDistribution.std(n,p)
         return ((1/(2*math.pi*std)**0.5)*math.e)**((-(x-mean)**2)/2*std**2)
     
+class Estimation:
+    def placeholder():
+        print("")
