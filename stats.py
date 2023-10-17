@@ -112,10 +112,21 @@ class NormalDistribution:
     Used with continuous binomial data
     Easier to approximate
     """
+    def equations():
+        print("mean = np")
+        print("variance = np(1-p)")
+        print("std = (variance)**0.5")
+        print("z = (x - mean) / std")
+        print("x = z * std + mean")
+
     def z(x, n, p):
         mean = BinomialDistribution.mean(n,p)
         std = BinomialDistribution.std(n,p)
-        return (x - mean) / std
+        z = (x - mean) / std
+        return z
+    def z_score(x, mean, std):
+        z = (x - mean) / std
+        return z
     def ztab():
         # prints out a z-score probability table
         print("")
@@ -123,6 +134,13 @@ class NormalDistribution:
         mean = BinomialDistribution.mean(n,p)
         std = BinomialDistribution.std(n,p)
         return ((1/(2*math.pi*std)**0.5)*math.e)**((-(x-mean)**2)/2*std**2)
+    def zprob(z_score):
+        from scipy.stats import norm
+        # Calculate the probability using the cumulative distribution function (CDF)
+        probability = norm.cdf(z_score)
+        return probability
+    def x_from_z(z_score, mean, std):
+        return z_score * std + mean
     
 class Estimation:
     def placeholder():
