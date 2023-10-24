@@ -167,3 +167,33 @@ class NormalDistribution:
 class Estimation:
     def placeholder():
         print("")
+    def confidence_interval(xbar, mu, std, n, Z):
+        """
+        Returns Z score interval
+        
+
+        Xbar ~ N(mu, std/root(n))
+        P(-z <= Z <= z) = 1-alpha
+
+        xbar-mu / (std/root(n)) = Z
+        -z <= Z <= z
+        -z*std/root(n) <= xbar-mu <= z*std/root(n)
+        -xbar - z*std/root(n) <= -mu <= -xbar - z*std/root(n)
+        xbar + z*std/root(n) >= mu >= xbar - z*std/root(n)
+        xbar - z*std/root(n) <= mu <= xbar + z*std/root(n) // Flipping the signs
+        """
+        if Z != None:
+            return [xbar - Z*std/(n**0.5), xbar + Z*std/(n**0.5)]
+        
+        Z = xbar-mu / (std/n**0.5)
+        return [xbar - Z*std/(n**0.5), xbar + Z*std/(n**0.5)]
+    
+    def margin_of_error(z, std, n):
+        """
+        ME = z_1-alpha/2 * std/root(n)
+        """
+        return z * std / (n**0.5)
+
+class HypothesisTesting:
+    def placeholder():
+        print("")
