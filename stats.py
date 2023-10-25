@@ -167,7 +167,7 @@ class NormalDistribution:
 class Estimation:
     def placeholder():
         print("")
-    def confidence_interval(xbar, mu, std, n, Z):
+    def confidence_interval(xbar, mu, std, n):
         """
         Returns Z score interval
         
@@ -182,10 +182,8 @@ class Estimation:
         xbar + z*std/root(n) >= mu >= xbar - z*std/root(n)
         xbar - z*std/root(n) <= mu <= xbar + z*std/root(n) // Flipping the signs
         """
-        if Z != None:
-            return [xbar - Z*std/(n**0.5), xbar + Z*std/(n**0.5)]
         
-        Z = xbar-mu / (std/n**0.5)
+        Z = (xbar-mu) / (std/n**0.5)
         return [xbar - Z*std/(n**0.5), xbar + Z*std/(n**0.5)]
     
     def margin_of_error(z, std, n):
