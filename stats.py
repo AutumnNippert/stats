@@ -202,6 +202,22 @@ class Estimation:
         }
 
 class HypothesisTesting:
+    """
+    Test Statistic: a value used to determine whether to reject the null hypothesis
+        Cooresponds to the t-score, and is usually compared to the critical value
+    Test Statistic = (x_bar - mu) / (s / (n ** 0.5)) // unknown sigma
+    Test Statistic = (X-bar - mu) / (std / (n ** 0.5)) // known sigma
+
+    USE: Check how the test statistic compares to the critical value to determine whether to reject the null hypothesis
+        Rejection Region
+
+    p-value: probability that the null hypothesis is true
+    p-value = 1 - cdf(test_statistic) // or using the t-table
+
+    USE: Check how P compares to alpha (< or >) to determine whether to reject the null hypothesis
+    
+    critical value = t-table value of alpha and degrees of freedom
+    """
     def test_statistic(x_bar, mu, std, n):
         return (x_bar - mu) / (std / (n ** 0.5))
     
