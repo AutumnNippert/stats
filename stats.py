@@ -143,5 +143,51 @@ class NormalDistribution:
         return z_score * std + mean
     
 class Estimation:
-    def placeholder():
-        print("")
+    """
+    Confidence Interval = Sample Mean ± Margin of Error
+    Margin of Error = Critical Value * Standard Error of the Mean
+    Standard Error of the Mean = Standard Deviation / (n ** 0.5)
+    """
+    def data_set(mean, std):
+        return {
+            'mean': mean,
+            'std': std
+        }
+    def sample(data_set, n):
+        return {
+            'mean': data_set['mean'],
+            'std': data_set['std'] / n ** 0.5
+        }
+    def prob_g(data_set, x):
+        z = NormalDistribution.z(x, data_set['mean'], data_set['std'])
+        return 1 - NormalDistribution.zprob(z)
+    def prob_l(data_set, x):
+        z = NormalDistribution.z(x, data_set['mean'], data_set['std'])
+        return NormalDistribution.zprob(z)
+    def prob_b(data_set, x1, x2):
+        z1 = NormalDistribution.z(x1, data_set['mean'], data_set['std'])
+        z2 = NormalDistribution.z(x2, data_set['mean'], data_set['std'])
+        return NormalDistribution.zprob(z2) - NormalDistribution.zprob(z1)
+    
+    def ci(x_bar, cv, s, n):
+        std_err_m = s / (n ** 0.5)
+        me = cv * std_err_m
+        ci = [x_bar - me, x_bar + me]
+        return {
+            "Confidence Interval": ci,
+            "Margin of Error": me,
+            "Standard Error of the Mean": std_err_m
+        }
+
+class HypothesisTesting:
+    def test_statistic(x_bar, mu, std, n):
+        return (x_bar - mu) / (std / (n ** 0.5))
+    
+    def p_value(test_statistic):
+        from scipy.stats import norm
+        # Calculate the probability using the cumulative distribution function (CDF)
+        probability = norm.cdf(test_statistic)
+        return probability
+    
+    def p_value_g(t, t_0):
+        return 1 - HypothesisTesting.p_value(t - t_0)
