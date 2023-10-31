@@ -1,5 +1,34 @@
 import math
 
+def equations():
+    print("Equations:")
+    print("mean = sum(list) / len(list)")
+    print("std = (E((mean-num)**2) / len) ** 0.5")
+    print("iqr = q3 - q1")
+    print("upper_fence = q3 + 1.5 * iqr")
+    print("lower_fence = q1 - 1.5 * iqr")
+
+    print()
+    print("Distributions:")
+    print("Key:")
+    print("n = number of trials")
+    print("p = probability of success")
+    print("q = probability of failure")
+    print("x = standardized value")
+
+    print()
+    print("mean = np")
+    print("variance = np(1-p)")
+    print("std = (variance)**0.5")
+    print("z = (x - mean) / std")
+    print("x = z * std + mean")
+    print("probability mass function: (nCx)(p**x)(1-p)**(n-x)")
+    print("comb = n! / ((n-x)! * x!)")
+
+    print()
+    print("rules:")
+    print("68, 95, 99.7 rule: percentage of data within 1, 2, 3 std of mean respectively")
+
 class Statistics:
     def mean(list):
         return sum(list) / len(list)
@@ -105,20 +134,13 @@ class BinomialDistribution:
         return sum
     def comb(n,x):
         print("Fun factorial stuff")
-        math.factorial(n)/(math.factorial(n-x) * math.factorial(x))
+        return math.factorial(n)/(math.factorial(n-x) * math.factorial(x))
 
 class NormalDistribution:
     """
     Used with continuous binomial data
     Easier to approximate
     """
-    def equations():
-        print("mean = np")
-        print("variance = np(1-p)")
-        print("std = (variance)**0.5")
-        print("z = (x - mean) / std")
-        print("x = z * std + mean")
-
     def z(x, n, p):
         mean = BinomialDistribution.mean(n,p)
         std = BinomialDistribution.std(n,p)
